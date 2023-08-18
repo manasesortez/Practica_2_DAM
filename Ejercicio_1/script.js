@@ -1,51 +1,51 @@
-const libros = ["Libro 1", "Libro 2", "Libro 3", "Libro 4", "Libro 5"];
+const books = ["Libro 1", "Libro 2", "Libro 3", "Libro 4", "Libro 5"];
 const output = document.getElementById("output");
 const menuInput = document.getElementById("menuInput");
 
 let isInMenu = true;
 
-const mostrarLibros = () =>{
-    output.innerHTML = `<p>Libros disponibles: ${libros.join(", ")}</p>`;
-    mostrarVolverAlInicio();
-}
+const showBooks = () => {
+    output.innerHTML = `<p>Libros disponibles: ${books.join(", ")}</p>`;
+    showBackToMenu();
+};
 
-const pedirPrestadoLibro = () => {
-    const libroPrestado = prompt("Ingrese el nombre del libro que desea pedir prestado:");
-    const libroIndex = libros.indexOf(libroPrestado);
-    if (libroIndex !== -1) {
-        libros.splice(libroIndex, 1);
-        mostrarLibros();
+const borrowBook = () => {
+    const borrowedBook = prompt("Ingrese el nombre del libro que desea pedir prestado:");
+    const bookIndex = books.indexOf(borrowedBook);
+    if (bookIndex !== -1) {
+        books.splice(bookIndex, 1);
+        showBooks();
     } else {
         alert("El libro no está disponible en la lista.");
     }
-}
+};
 
-const agregarODevolverLibro = () => {
-    const accion = prompt("¿Desea agregar o devolver un libro? (agregar/devolver)").toLowerCase();
-    const libro = prompt("Ingrese el nombre del libro:");
+const addOrReturnBook = () => {
+    const action = prompt("¿Desea agregar o devolver un libro? (agregar/devolver)").toLowerCase();
+    const book = prompt("Ingrese el nombre del libro:");
     
-    if (accion === "agregar") {
-        libros.push(libro);
-    } else if (accion === "devolver") {
-        libros.push(libro);
+    if (action === "agregar") {
+        books.push(book);
+    } else if (action === "devolver") {
+        books.push(book);
     } else {
         alert("Acción no reconocida.");
         return;
     }
     
-    mostrarLibros();
-}
+    showBooks();
+};
 
-const verificarLibro = () => {
-    const libroBuscado = prompt("Ingrese el nombre del libro que desea verificar:");
-    if (libros.includes(libroBuscado)) {
+const checkBook = () => {
+    const searchedBook = prompt("Ingrese el nombre del libro que desea verificar:");
+    if (books.includes(searchedBook)) {
         alert("El libro está en la lista.");
     } else {
         alert("El libro no está en la lista.");
     }
-}
+};
 
-const mostrarMenu = () => {
+const showMenu = () => {
     output.innerHTML = `
         <p>Opciones:</p>
         <p>a. Ver la lista de libros.</p>
@@ -54,29 +54,29 @@ const mostrarMenu = () => {
         <p>d. Verificar si existe un libro.</p>
         <p>e. Salir.</p>
     `;
-}
+};
 
-const mostrarVolverAlInicio = () =>  {
-    output.innerHTML += "<p>f. Volver al inicio.</p>";
-}
+const showBackToMenu = () => {
+    output.innerHTML += "<p>f. Volver al menú.</p>";
+};
 
-mostrarMenu();
+showMenu();
 
 menuInput.addEventListener("keypress", (event) => {
     if (event.key === "Enter") {
-        const opcion = menuInput.value.toLowerCase();
-        switch (opcion) {
+        const option = menuInput.value.toLowerCase();
+        switch (option) {
             case "a":
-                mostrarLibros();
+                showBooks();
                 break;
             case "b":
-                pedirPrestadoLibro();
+                borrowBook();
                 break;
             case "c":
-                agregarODevolverLibro();
+                addOrReturnBook();
                 break;
             case "d":
-                verificarLibro();
+                checkBook();
                 break;
             case "e":
                 if (isInMenu) {
@@ -84,12 +84,12 @@ menuInput.addEventListener("keypress", (event) => {
                     output.innerHTML = "<p>¡Hasta luego!</p>";
                 } else {
                     isInMenu = true;
-                    mostrarMenu();
+                    showMenu();
                 }
                 break;
             case "f":
                 isInMenu = true;
-                mostrarMenu();
+                showMenu();
                 break;
             default:
                 alert("Opción no válida.");
